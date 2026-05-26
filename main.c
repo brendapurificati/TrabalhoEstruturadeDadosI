@@ -3,7 +3,7 @@
 #include <string.h>
 
 Noticia* criarNoticia() {
-    
+    Noticia* Not1 = (Noticia*)malloc(sizeof(Noticia*));
 }
 
 typedef struct noticia {
