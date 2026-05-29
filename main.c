@@ -20,10 +20,14 @@ typedef struct noticia {
 
 typedef struct Nolista {
     Noticia noticia;
-    struct Nolista *cab, *cau, *prox;
+    struct Nolista *prox;
 } NoLista;
 
-int estaVazia(NoLista **l) {
+typedef struct lista {
+    NoLista *cab, *cau;
+} Lista;
+
+int estaVazia(Lista *l) {
     if (l == NULL) {
         return 1;
     }
@@ -37,6 +41,24 @@ int criarID() {
     return ++id;
 }
 
+void criarLista(Lista *l) {
+    l->cab = NULL;
+    l->cau = NULL;
+}
+
+void inserirElementoInicio(Lista *l, Noticia v) {
+    NoLista* novo = (NoLista*)malloc(sizeof(NoLista));
+    if (novo == NULL) {
+        printf("testealalala");
+    }
+    novo->noticia = v;
+    novo->prox = l->cab;
+    l->cab = novo;
+    if (l->cau == NULL) {
+        l->cau = novo;
+    }
+}
+
 void imprimirNoticia(Noticia *not) {
     printf("Id: %d\n", not->id);
     printf("Classificacao: %d\n", not->classificacao);
@@ -44,6 +66,18 @@ void imprimirNoticia(Noticia *not) {
     printf("Titulo: %s\n", not->titulo);
     printf("Conteudo: %s\n", not->conteudo);
     printf("Fonte: %s\n", not->fonte);
+}
+
+void imprimirListaNoticia(Lista *l) {
+    if (!estaVazia(l)) {
+        NoLista *p;
+        for (p = l->cab; p != NULL; p = p->prox) {
+            imprimirNoticia(&p->noticia);
+        }
+    }
+    else {
+        printf("Lista de notícias vazia!");
+    }
 }
 
 Noticia* criarNoticia() {
@@ -76,12 +110,12 @@ int main() {
     Noticia* Noticia1 = criarNoticia();
     imprimirNoticia(Noticia1);
     Noticia* Noticia2 = criarNoticia();
-    imprimirNoticia(Noticia2);
-    liberarNoticia(Noticia1);
-    imprimirNoticia(Noticia1);
+    printf("-------------------------------------- \n\n");
+    Lista Lista1;
+    criarLista(&Lista1);
+    inserirElementoInicio(&Lista1, *Noticia1);
+    inserirElementoInicio(&Lista1, *Noticia2);
+    imprimirListaNoticia(&Lista1);
 
     return 0;
 }
-
-
-
