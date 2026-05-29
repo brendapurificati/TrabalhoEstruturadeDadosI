@@ -1,5 +1,6 @@
 #ifndef NOTICIA_H
 #define NOTICIA_H
+#include "ListaCabCau.h"
 
 typedef enum classificacao {
     EmAnalise, 

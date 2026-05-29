@@ -19,4 +19,10 @@ void inserirElementoInicio(Lista *l, Noticia v);
 
 void imprimirListaNoticia(Lista *l);
 
+Noticia* buscarPalavraChave(Lista *l, char palavra[]);
+
+void removerPorPalavraChave(Lista *l, char palavra[]);
+
+void removerPorId(Lista *l, int id);
+
 #endif
