@@ -4,15 +4,6 @@
 #include "Noticia.h"
 #include "ListaCabCau.h"
 
-typedef struct Nolista {
-    Noticia noticia;
-    struct Nolista *prox;
-} NoLista;
-
-typedef struct lista {
-    NoLista *cab, *cau;
-} Lista;
-
 int estaVazia(Lista *l) {
     if (l->cab == NULL) {
         return 1;
