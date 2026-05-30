@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ListaCabCau.h"
+#include "Noticia.h"
 
 int criarID() {
     static int id = 0;

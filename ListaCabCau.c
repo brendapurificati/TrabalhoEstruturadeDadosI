@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Noticia.h"
+#include "ListaCabCau.h"
 
 int estaVazia(Lista *l) {
     if (l->cab == NULL) {
@@ -54,26 +55,31 @@ Noticia* buscarPalavraChave(Lista *l, char palavra[]) {
 
 // função em teste
 void removerPorPalavraChave(Lista *l, char palavra[]) {
-    NoLista *p;
-    NoLista* aux = NULL;
-    for (p = l->cab; p != NULL; p = p->prox) {
+    NoLista *p = l->cab;
+    NoLista *aux = NULL;
+
+    while (p != NULL) {
         if (strstr(p->noticia.titulo, palavra) || strstr(p->noticia.conteudo, palavra)) {
             if (aux == NULL) {
-                liberarNoticia(p->noticia);
                 l->cab = p->prox;
                 if (l->cab == NULL) {
                     l->cau = NULL;
                 }
-            }
+                free(p); 
+                p = l->cab; 
+            } 
             else {
                 aux->prox = p->prox;
                 if (p == l->cau) {
                     l->cau = aux;
                 }
-            liberarNoticia(p->noticia);
-            free(p);
+                free(p); 
+                p = aux->prox; 
             }
-        aux = p;
+        } 
+        else {
+            aux = p;
+            p = p->prox;
         }
     }
 }
@@ -85,7 +91,7 @@ void removerPorId(Lista *l, int id) {
     for (p = l->cab; p != NULL; p = p->prox) {
         if (id == p->noticia.id) {
             if (aux == NULL) {
-                liberarNoticia(p->noticia);
+                liberarNoticia(&p->noticia);
                 l->cab = p->prox;
                 if (l->cab == NULL) {
                     l->cau = NULL;
@@ -96,7 +102,7 @@ void removerPorId(Lista *l, int id) {
                 if (p == l->cau) {
                     l->cau = aux;
                 }
-            liberarNoticia(p->noticia);
+            liberarNoticia(&p->noticia);
             free(p);
             }
         }

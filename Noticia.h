@@ -1,6 +1,5 @@
 #ifndef NOTICIA_H
 #define NOTICIA_H
-#include "ListaCabCau.h"
 
 typedef enum classificacao {
     EmAnalise, 
@@ -20,10 +19,10 @@ typedef struct noticia {
 
 int criarID();
 
-void imprimirNoticia(/*Noticia *not*/);
+void imprimirNoticia(Noticia *not);
 
 Noticia* criarNoticia();
 
-void liberarNoticia(/*Noticia *not*/);
+void liberarNoticia(Noticia *not);
 
 #endif

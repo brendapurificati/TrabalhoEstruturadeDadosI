@@ -16,8 +16,6 @@ int main() {
     inserirElementoInicio(&Lista1, *Noticia2);
     imprimirListaNoticia(&Lista1);
     printf("-------------------------------------- \n\n");
-    Noticia* aux = buscarPalavraChave(&Lista1, "abelha");
-    printf(aux);
 
     return 0;
 }

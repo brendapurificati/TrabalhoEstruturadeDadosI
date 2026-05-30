@@ -2,6 +2,8 @@
 #define LISTACABCAU_H
 #include "Noticia.h"
 
+typedef struct noticia Noticia;
+
 typedef struct Nolista {
     Noticia noticia;
     struct Nolista *prox;
