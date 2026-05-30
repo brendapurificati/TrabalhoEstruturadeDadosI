@@ -17,6 +17,8 @@ typedef struct noticia {
     // 1- EmAnalise, 2-Suspeita, 3-Confiavel
 } Noticia;
 
+void limparTerminal();
+
 int criarID();
 
 void imprimirNoticia(Noticia *not);

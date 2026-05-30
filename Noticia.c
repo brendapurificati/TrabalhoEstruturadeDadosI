@@ -4,35 +4,44 @@
 #include "ListaCabCau.h"
 #include "Noticia.h"
 
+void limparTerminal() {
+    #ifdef _WIN32
+    system("cls");
+    #else 
+    system("clear");
+    #endif
+}
+
 int criarID() {
     static int id = 0;
     return ++id;
 }
 
 void imprimirNoticia(Noticia *not) {
-    printf("Id: %d\n", not->id);
-    printf("Classificacao: %d\n", not->classificacao);
-    printf("Data: %s\n", not->data);
-    printf("Titulo: %s\n", not->titulo);
-    printf("Conteudo: %s\n", not->conteudo);
-    printf("Fonte: %s\n", not->fonte);
+    if (not != NULL) {
+        printf("Id: %d\n", not->id);
+        printf("Classificacao: %d\n", not->classificacao);
+        printf("Data: %s", not->data);
+        printf("Titulo: %s", not->titulo);
+        printf("Conteudo: %s", not->conteudo);
+        printf("Fonte: %s", not->fonte);
+    }
+        else {
+            printf("Está vazia");
+        }
 }
 
 Noticia* criarNoticia() {
 
     Noticia* Not1 = (Noticia*)malloc(sizeof(Noticia));
     printf("Digite a data de publicacao da noticia: ");
-    scanf("%s", Not1->data);
-    getchar();
+    fgets(Not1->data, sizeof(Not1->data), stdin);
     printf("Digite o titulo da publicacao: ");
-    scanf("%s", Not1->titulo);
-    getchar();
+    fgets(Not1->titulo, sizeof(Not1->titulo), stdin);
     printf("Digite o conteudo da publicacao: ");
-    scanf("%s", Not1->conteudo);
-    getchar();
+    fgets(Not1->conteudo, sizeof(Not1->conteudo), stdin);
     printf("Digite a fonte da publicacao: ");
-    scanf("%s", Not1->fonte);
-    getchar();
+    fgets(Not1->fonte, sizeof(Not1->fonte), stdin);
     Not1->classificacao = EmAnalise;
     Not1->id = criarID();
 

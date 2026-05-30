@@ -43,7 +43,7 @@ void imprimirListaNoticia(Lista *l) {
     }
 }
 
-// função em teste
+// função funcionando bem
 Noticia* buscarPalavraChave(Lista *l, char palavra[]) {
     NoLista *p;
     for (p = l->cab; p != NULL; p = p->prox) {
@@ -86,26 +86,27 @@ void removerPorPalavraChave(Lista *l, char palavra[]) {
 
 // função em teste
 void removerPorId(Lista *l, int id) {
-    NoLista* p; 
-    NoLista* aux = NULL;
-    for (p = l->cab; p != NULL; p = p->prox) {
+    NoLista *p = l->cab;
+    NoLista *aux = NULL;
+
+    while (p != NULL) {
         if (id == p->noticia.id) {
             if (aux == NULL) {
-                liberarNoticia(&p->noticia);
                 l->cab = p->prox;
                 if (l->cab == NULL) {
                     l->cau = NULL;
                 }
-            }
+            } 
             else {
                 aux->prox = p->prox;
                 if (p == l->cau) {
                     l->cau = aux;
                 }
-            liberarNoticia(&p->noticia);
-            free(p);
             }
+            free(p);
+            return; 
         }
         aux = p;
+        p = p->prox;
     }
 }
