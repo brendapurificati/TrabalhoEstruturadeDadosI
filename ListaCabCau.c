@@ -4,6 +4,7 @@
 #include "Noticia.h"
 #include "ListaCabCau.h"
 
+// função que verifica se a lista está vazia
 int estaVazia(Lista *l) {
     if (l->cab == NULL) {
         return 1;
@@ -13,11 +14,13 @@ int estaVazia(Lista *l) {
     }
 }
 
+// cria a lista inicializando os ponteiros de cabeça e cauda como NULL
 void criarLista(Lista *l) {
     l->cab = NULL;
     l->cau = NULL;
 }
 
+// função para inserir um elemento no início da lista
 void inserirElementoInicio(Lista *l, Noticia v) {
     NoLista* novo = (NoLista*)malloc(sizeof(NoLista));
     if (novo == NULL) {
@@ -31,6 +34,7 @@ void inserirElementoInicio(Lista *l, Noticia v) {
     }
 }
 
+// função para imprimir a lista de notícias
 void imprimirListaNoticia(Lista *l) {
     if (!estaVazia(l)) {
         NoLista *p;
@@ -43,7 +47,7 @@ void imprimirListaNoticia(Lista *l) {
     }
 }
 
-// função funcionando bem
+// função para buscar uma notícia por palavra chave no título ou conteúdo
 Noticia* buscarPalavraChave(Lista *l, char palavra[]) {
     NoLista *p;
     for (p = l->cab; p != NULL; p = p->prox) {
@@ -51,9 +55,10 @@ Noticia* buscarPalavraChave(Lista *l, char palavra[]) {
             return &p->noticia;
         }
     }
+    return NULL;
 }
 
-// função em teste
+// função para remover uma notícia por palavra chave no título ou conteúdo
 void removerPorPalavraChave(Lista *l, char palavra[]) {
     NoLista *p = l->cab;
     NoLista *aux = NULL;
@@ -66,7 +71,7 @@ void removerPorPalavraChave(Lista *l, char palavra[]) {
                     l->cau = NULL;
                 }
                 free(p); 
-                p = l->cab; 
+                return;
             } 
             else {
                 aux->prox = p->prox;
@@ -74,7 +79,7 @@ void removerPorPalavraChave(Lista *l, char palavra[]) {
                     l->cau = aux;
                 }
                 free(p); 
-                p = aux->prox; 
+                return;
             }
         } 
         else {
@@ -84,7 +89,7 @@ void removerPorPalavraChave(Lista *l, char palavra[]) {
     }
 }
 
-// função em teste
+// função para remover uma notícia por ID 
 void removerPorId(Lista *l, int id) {
     NoLista *p = l->cab;
     NoLista *aux = NULL;

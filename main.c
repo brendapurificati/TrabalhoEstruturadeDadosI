@@ -6,25 +6,21 @@
 
 int main() {
 
-    Noticia* Noticia1 = criarNoticia();
-    imprimirNoticia(Noticia1);
-    Noticia* Noticia2 = criarNoticia();
-    Lista Lista1;
-    criarLista(&Lista1);
-    inserirElementoInicio(&Lista1, *Noticia1);
-    inserirElementoInicio(&Lista1, *Noticia2);
-    imprimirListaNoticia(&Lista1);
-    printf("-------------------------------------- \n\n");
-    Noticia aux = *buscarPalavraChave(&Lista1, "abelhas");
-    imprimirNoticia(&aux);
-    int a;
-    scanf("%d", &a);
+    Noticia* Not1 = criarNoticia();
+    Noticia* Not2 = criarNoticia();
+    Noticia* Not3 = criarNoticia();
+    Lista* lista1;
+    criarLista(lista1);
+    inserirElementoInicio(lista1, *Not1);
+    inserirElementoInicio(lista1, *Not2);
+    inserirElementoInicio(lista1, *Not3);
+    // ----------------------------------------------------
+    imprimirListaNoticia(lista1);
+    // ----------------------------------------------------
+    printf("Teste1");
     limparTerminal();
-    removerPorPalavraChave(&Lista1, "abelhas");
-    Noticia aux2 = *buscarPalavraChave(&Lista1, "abelhas");
-    imprimirNoticia(&aux2);
-    printf("Removido com sucesso");
-    scanf("%d", &a);
+    removerPorId(lista1, 2);
+    imprimirListaNoticia(lista1);
 
     return 0;
 }
