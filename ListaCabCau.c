@@ -5,7 +5,7 @@
 #include "ListaCabCau.h"
 
 // função que verifica se a lista está vazia
-int estaVazia(Lista *l) {
+int estaVaziaCabCau(ListaCabCau *l) {
     if (l->cab == NULL) {
         return 1;
     }
@@ -15,18 +15,18 @@ int estaVazia(Lista *l) {
 }
 
 // cria a lista inicializando os ponteiros de cabeça e cauda como NULL
-void criarLista(Lista *l) {
+void criarListaCabCau(ListaCabCau *l) {
     l->cab = NULL;
     l->cau = NULL;
 }
 
 // função para inserir um elemento no início da lista
-void inserirElementoInicio(Lista *l, Noticia v) {
-    NoLista* novo = (NoLista*)malloc(sizeof(NoLista));
+void inserirInicioCabCau(ListaCabCau *l, Noticia v) {
+    NoCabCau* novo = (NoCabCau*)malloc(sizeof(NoCabCau));
     if (novo == NULL) {
         printf("testealalala");
     }
-    novo->noticia = v;
+    novo->info = v;
     novo->prox = l->cab;
     l->cab = novo;
     if (l->cau == NULL) {
@@ -35,11 +35,11 @@ void inserirElementoInicio(Lista *l, Noticia v) {
 }
 
 // função para imprimir a lista de notícias
-void imprimirListaNoticia(Lista *l) {
-    if (!estaVazia(l)) {
-        NoLista *p;
+void imprimirListaCabCau(ListaCabCau *l) {
+    if (!estaVaziaCabCau(l)) {
+        NoCabCau *p;
         for (p = l->cab; p != NULL; p = p->prox) {
-            imprimirNoticia(&p->noticia);
+            imprimirNoticia(&p->info);
         }
     }
     else {
@@ -48,23 +48,22 @@ void imprimirListaNoticia(Lista *l) {
 }
 
 // função para buscar uma notícia por palavra chave no título ou conteúdo
-Noticia* buscarPalavraChave(Lista *l, char palavra[]) {
-    NoLista *p;
+Noticia* buscarPalavraChaveCabCau(ListaCabCau *l, char palavra[]) {
+    NoCabCau *p;
     for (p = l->cab; p != NULL; p = p->prox) {
-        if (strstr(p->noticia.titulo, palavra) || strstr(p->noticia.conteudo, palavra)) {
-            return &p->noticia;
+        if (strstr(p->info.titulo, palavra) || strstr(p->info.conteudo, palavra)) {
+            return &p->info;
         }
     }
     return NULL;
 }
 
 // função para remover uma notícia por palavra chave no título ou conteúdo
-void removerPorPalavraChave(Lista *l, char palavra[]) {
-    NoLista *p = l->cab;
-    NoLista *aux = NULL;
-
+void removerPorPalavraChaveCabCau(ListaCabCau *l, char palavra[]) {
+    NoCabCau *p = l->cab;
+    NoCabCau *aux = NULL;
     while (p != NULL) {
-        if (strstr(p->noticia.titulo, palavra) || strstr(p->noticia.conteudo, palavra)) {
+        if (strstr(p->info.titulo, palavra) || strstr(p->info.conteudo, palavra)) {
             if (aux == NULL) {
                 l->cab = p->prox;
                 if (l->cab == NULL) {
@@ -90,12 +89,12 @@ void removerPorPalavraChave(Lista *l, char palavra[]) {
 }
 
 // função para remover uma notícia por ID 
-void removerPorId(Lista *l, int id) {
-    NoLista *p = l->cab;
-    NoLista *aux = NULL;
+void removerPorIdCabCau(ListaCabCau *l, int id) {
+    NoCabCau *p = l->cab;
+    NoCabCau *aux = NULL;
 
     while (p != NULL) {
-        if (id == p->noticia.id) {
+        if (id == p->info.id) {
             if (aux == NULL) {
                 l->cab = p->prox;
                 if (l->cab == NULL) {
@@ -114,4 +113,14 @@ void removerPorId(Lista *l, int id) {
         aux = p;
         p = p->prox;
     }
+}
+
+// função para retornar a quantidade de notícias na lista
+void retornarQuantidadeNoticiasCabCau(ListaCabCau *l) {
+    int qntd = 0;
+    NoCabCau *p;
+    for (p = l->cab; p != NULL; p = p->prox) {
+        qntd++;
+    }
+    printf("Quantidade de notícias: %d\n", qntd);
 }

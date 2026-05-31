@@ -4,27 +4,30 @@
 
 typedef struct noticia Noticia;
 
-typedef struct Nolista {
-    Noticia noticia;
-    struct Nolista *prox;
-} NoLista;
+typedef struct NoCabCau {
+    Noticia info;
+    struct NoCabCau *prox;
+} NoCabCau;
 
-typedef struct lista {
-    NoLista *cab, *cau;
-} Lista;
+typedef struct listacabcau {
+    NoCabCau *cab, *cau;
+} ListaCabCau;
 
-int estaVazia(Lista *l);
+int estaVaziaCabCau(ListaCabCau *l);
 
-void criarLista(Lista *l);
+void criarListaCabCau(ListaCabCau *l);
 
-void inserirElementoInicio(Lista *l, Noticia v);
+void inserirInicioCabCau(ListaCabCau *l, Noticia v);
 
-void imprimirListaNoticia(Lista *l);
+void imprimirListaCabCau(ListaCabCau *l);
 
-Noticia* buscarPalavraChave(Lista *l, char palavra[]);
+Noticia* buscarPalavraChaveCabCau(ListaCabCau *l, char palavra[]);
 
-void removerPorPalavraChave(Lista *l, char palavra[]);
+void removerPorPalavraChaveCabCau(ListaCabCau *l, char palavra[]);
 
-void removerPorId(Lista *l, int id);
+void removerPorIdCabCau(ListaCabCau *l, int id);
+
+void retornarQuantidadeNoticiasCabCau(ListaCabCau *l);
+
 
 #endif

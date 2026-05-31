@@ -14,7 +14,6 @@ typedef struct noticia {
     char conteudo[150];
     char fonte[70];
     Classificacao classificacao;
-    // 1- EmAnalise, 2-Suspeita, 3-Confiavel
 } Noticia;
 
 void limparTerminal();
