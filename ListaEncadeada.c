@@ -62,6 +62,7 @@ void removerPorPalavraChaveEncadeada(NoListaEncadeada **l, char palavra[]) {
                     aux->prox = p->prox;
                     free(p);
                 }
+                return;
             }
             aux = p;
         }
@@ -103,7 +104,7 @@ void retornarSuspeitas(NoListaEncadeada *l) {
 
 void retornarQuantidadeSuspeitas(NoListaEncadeada *l) {
     NoListaEncadeada *p;
-    int contador = 1;
+    int contador = 0;
     if (!estaVaziaEncadeada(&l)) {
         for (p = l; p != NULL; p = p->prox) {
             if (p->info->classificacao == Suspeita) {
@@ -119,7 +120,7 @@ void retornarQuantidadeSuspeitas(NoListaEncadeada *l) {
 
 void retornarQuantidadeConfiaveis(NoListaEncadeada *l) {
     NoListaEncadeada *p;
-    int contador = 1;
+    int contador = 0;
     if (!estaVaziaEncadeada(&l)) {
         for (p = l; p != NULL; p = p->prox) {
             if (p->info->classificacao == Confiavel) {

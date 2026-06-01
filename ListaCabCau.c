@@ -45,7 +45,7 @@ void imprimirListaCabCau(ListaCabCau *l) {
         }
     }
     else {
-        printf("| Lista de notícias vazia!\n");
+        printf("| Lista de noticias vazia!\n");
     }
 }
 
@@ -95,7 +95,7 @@ void retornarQuantidadeNoticiasCabCau(ListaCabCau *l) {
     for (p = l->cab; p != NULL; p = p->prox) {
         qntd++;
     }
-    printf("| Quantidade de notícias pendentes: %d\n", qntd);
+    printf("| Quantidade de noticias pendentes: %d\n", qntd);
 }
 
 void ClassificarNoticia(ListaCabCau *pendentes, NoListaEncadeada **verificadas) {
@@ -113,14 +113,22 @@ void ClassificarNoticia(ListaCabCau *pendentes, NoListaEncadeada **verificadas) 
             }
             else if (classificacao == 1) {
                 p->info.classificacao = Suspeita;
-                removerPorIdCabCau(pendentes, p->info.id);
-                insereInicioEncadeada(verificadas, &p->info);
+                Noticia *aux = (Noticia*)malloc(sizeof(Noticia));
+                if (aux != NULL) {
+                    *aux = p->info;
+                    insereInicioEncadeada(verificadas, aux);
+                    removerPorIdCabCau(pendentes, p->info.id);
+                }
                 printf("| Noticia classificada como Suspeita.\n");
             }
             else if (classificacao == 2) {
                 p->info.classificacao = Confiavel;
-                removerPorIdCabCau(pendentes, p->info.id);
-                insereInicioEncadeada(verificadas, &p->info);
+                Noticia *aux = (Noticia*)malloc(sizeof(Noticia));
+                if (aux != NULL) {
+                    *aux = p->info;
+                    insereInicioEncadeada(verificadas, aux);
+                    removerPorIdCabCau(pendentes, p->info.id);
+                }
                 printf("| Noticia classificada como Confiavel.\n");
             }
             else {

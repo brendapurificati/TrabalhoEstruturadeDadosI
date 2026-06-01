@@ -9,6 +9,7 @@ int opcao;
 char palavra[50];
 
 void menu() {
+    
     limparTerminal();
     printf("---------------------[ MENU ]---------------------\n");
     printf("| 1 - Adicionar nova noticia\n");
@@ -52,6 +53,7 @@ int main() {
             pausa();
             break;
         case 2:
+            imprimirListaCabCau(&listaCabCau1);
             printf("| Digite o ID da noticia que deseja remover: \n");
             int id;
             scanf("%d", &id);
@@ -60,6 +62,7 @@ int main() {
             pausa();
             break;
         case 3:
+            imprimirListaEncadeada(listaEncadeada1);
             printf("| Digite a palavra-chave para remover noticia verificada: \n");
             scanf("%s", palavra);
             removerPorPalavraChaveEncadeada(&listaEncadeada1, palavra);
