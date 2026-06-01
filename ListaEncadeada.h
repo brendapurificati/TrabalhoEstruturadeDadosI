@@ -16,6 +16,14 @@ void insereInicioEncadeada(NoListaEncadeada** l, Noticia* v);
 
 void removerPorPalavraChaveEncadeada(NoListaEncadeada **l, char palavra[]);
 
-void imprimirListaEncadeada(NoListaEncadeada **l);
+void imprimirListaEncadeada(NoListaEncadeada *l);
+
+void retornarConfiaveis(NoListaEncadeada *l);
+
+void retornarSuspeitas(NoListaEncadeada *l);
+
+void retornarQuantidadeSuspeitas(NoListaEncadeada *l);
+
+void retornarQuantidadeConfiaveis(NoListaEncadeada *l);
 
 #endif

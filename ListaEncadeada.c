@@ -29,24 +29,20 @@ void insereInicioEncadeada(NoListaEncadeada** l, Noticia* v) {
         *l = novo;
     }
     else {
-        printf("Erro ao alocar memoria!\n");
+        printf("| Erro ao alocar memoria!\n");
     }
 }
 
 // função para imprimir a lista 
-void imprimirListaEncadeada(NoListaEncadeada **l) {
+void imprimirListaEncadeada(NoListaEncadeada *l) {
     NoListaEncadeada *p;
-    if (!estaVaziaEncadeada(l)) {
-        for (p = *l; p != NULL; p = p->prox) {
-            printf("ID: %d\n", p->info->id);
-            printf("Titulo: %s", p->info->titulo);
-            printf("Conteudo: %s", p->info->conteudo);
-            printf("Data de Publicacao: %s", p->info->data);
-            printf("Classificacao: %d\n", p->info->classificacao);
+    if (!estaVaziaEncadeada(&l)) {
+        for (p = l; p != NULL; p = p->prox) {
+            imprimirNoticia(p->info);
         }
     }
     else {
-        printf("A lista estáa vazia.\n");
+        printf("| A lista esta vazia.\n");
     }
 }
     
@@ -71,11 +67,69 @@ void removerPorPalavraChaveEncadeada(NoListaEncadeada **l, char palavra[]) {
         }
     }
     else {
-        printf("A lista esta vazia.\n");
+        printf("| A lista esta vazia.\n");
     }
 }
 
-// RetornarNoticiasConfiaveis
-// RetornarNoticiasSuspeitas
-// Classificar noticias
+// função para retornar as notícias classificadas como confiáveis
+void retornarConfiaveis(NoListaEncadeada *l) {
+    NoListaEncadeada *p;
+    if (!estaVaziaEncadeada(&l)) {
+        for (p = l; p != NULL; p = p->prox) {
+            if (p->info->classificacao == Confiavel) {
+                imprimirNoticia(p->info);
+            }
+        }
+    }
+    else {
+        printf("| A lista esta vazia.\n");
+    }
+}
+
+// função para retornar as notícias classificadas como suspeitas
+void retornarSuspeitas(NoListaEncadeada *l) {
+    NoListaEncadeada *p;
+    if (!estaVaziaEncadeada(&l)) {
+        for (p = l; p != NULL; p = p->prox) {
+            if (p->info->classificacao == Suspeita) {
+                imprimirNoticia(p->info);
+            }
+        }
+    }
+    else {
+        printf("| A lista esta vazia.\n");
+    }
+}
+
+void retornarQuantidadeSuspeitas(NoListaEncadeada *l) {
+    NoListaEncadeada *p;
+    int contador = 1;
+    if (!estaVaziaEncadeada(&l)) {
+        for (p = l; p != NULL; p = p->prox) {
+            if (p->info->classificacao == Suspeita) {
+                contador++;
+            }
+        }
+        printf("| Quantidade de noticias suspeitas: %d\n", contador);
+    }
+    else {
+        printf("| A lista esta vazia.\n");
+    }
+}
+
+void retornarQuantidadeConfiaveis(NoListaEncadeada *l) {
+    NoListaEncadeada *p;
+    int contador = 1;
+    if (!estaVaziaEncadeada(&l)) {
+        for (p = l; p != NULL; p = p->prox) {
+            if (p->info->classificacao == Confiavel) {
+                contador++;
+            }
+        }
+        printf("| Quantidade de noticias confiaveis: %d\n", contador);
+    }
+    else {
+        printf("| A lista esta vazia.\n");
+    }
+}
 

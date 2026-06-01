@@ -1,6 +1,7 @@
 #ifndef LISTACABCAU_H
 #define LISTACABCAU_H
 #include "Noticia.h"
+#include "ListaEncadeada.h"
 
 typedef struct noticia Noticia;
 
@@ -21,13 +22,12 @@ void inserirInicioCabCau(ListaCabCau *l, Noticia v);
 
 void imprimirListaCabCau(ListaCabCau *l);
 
-Noticia* buscarPalavraChaveCabCau(ListaCabCau *l, char palavra[]);
-
-void removerPorPalavraChaveCabCau(ListaCabCau *l, char palavra[]);
+void buscarPalavraChaveCabCau(ListaCabCau *l, char palavra[]);
 
 void removerPorIdCabCau(ListaCabCau *l, int id);
 
 void retornarQuantidadeNoticiasCabCau(ListaCabCau *l);
 
+void ClassificarNoticia(ListaCabCau *pendentes, NoListaEncadeada **verificadas);
 
 #endif

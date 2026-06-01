@@ -5,41 +5,119 @@
 #include "ListaCabCau.h"
 #include "ListaEncadeada.h"
 
+int opcao;
+char palavra[50];
+
+void menu() {
+    limparTerminal();
+    printf("---------------------[ MENU ]---------------------\n");
+    printf("| 1 - Adicionar nova noticia\n");
+    printf("| 2 - Remover noticia pendente por ID\n");
+    printf("| 3 - Remover noticia verificada por palavra-chave\n");
+    printf("| 4 - Buscar noticia pendente por palavra-chave\n");
+    printf("| 5 - Imprimir noticias\n");
+    printf("| 6 - Classificar noticia\n");
+    printf("| 7 - Imprimir quantidade de noticias por categoria\n");
+    printf("| 8 - Sair\n");
+    printf("|-------------------------------------------------\n");
+    printf("| Digite a opcao desejada: ");
+}
+
+void pausa() {
+    printf("| Pressione enter para continuar...");
+    while (getchar() != '\n');
+    getchar();       
+}
+
 int main() {
 
-    Noticia* Not1 = criarNoticia();
-    Noticia* Not2 = criarNoticia();
-    // Noticia* Not3 = criarNoticia();
-    ListaCabCau lista1;
-    criarListaCabCau(&lista1);
-    inserirInicioCabCau(&lista1, *Not1);
-    inserirInicioCabCau(&lista1, *Not2);
-    // inserirInicioCabCau(&lista1, *Not3);
-    // ----------------------------------------------------
-    imprimirListaCabCau(&lista1);
-    // ----------------------------------------------------
-    int a;
-    scanf("%d", &a);
+    // criação das duas listas
+    ListaCabCau listaCabCau1;
+    criarListaCabCau(&listaCabCau1);
+    NoListaEncadeada *listaEncadeada1;
+    criarListaEncadeada(&listaEncadeada1);
+
+    do {
+    menu();
+    scanf("%d", &opcao);
+    getchar(); 
     limparTerminal();
-    //-----------------------------------------------------
-    printf("Teste1");
-    NoListaEncadeada* listaencadeada1;
-    criarListaEncadeada(&listaencadeada1);
-    printf("Teste2");
-    insereInicioEncadeada(&listaencadeada1, Not1);
-    printf("Teste3");
-    insereInicioEncadeada(&listaencadeada1, Not2);
-    printf("Teste4");
-    // insereInicioEncadeada(&listaencadeada1, Not3);
-    // printf("Teste5");
-    imprimirListaEncadeada(&listaencadeada1);
-    printf("Teste6");
-    int b;
-    scanf("%d", &b);
-    limparTerminal();
-    //-----------------------------------------------------
-    removerPorPalavraChaveEncadeada(&listaencadeada1, "abelhas");
-    imprimirListaEncadeada(&listaencadeada1);
+
+    switch (opcao) {
+        case 1:
+            Noticia* novaNoticia = criarNoticia();
+            inserirInicioCabCau(&listaCabCau1, *novaNoticia);
+            printf("| Noticia criada com ID: %d\n", novaNoticia->id);
+            imprimirNoticia(novaNoticia);
+            pausa();
+            break;
+        case 2:
+            printf("| Digite o ID da noticia que deseja remover: \n");
+            int id;
+            scanf("%d", &id);
+            removerPorIdCabCau(&listaCabCau1, id);
+            printf("| Noticia removida com sucesso!\n");
+            pausa();
+            break;
+        case 3:
+            printf("| Digite a palavra-chave para remover noticia verificada: \n");
+            scanf("%s", palavra);
+            removerPorPalavraChaveEncadeada(&listaEncadeada1, palavra);
+            printf("| Noticia removida com sucesso!\n");
+            pausa();
+            break;
+        case 4:
+            printf("| Digite a palavra-chave para buscar noticia pendente: \n");
+            scanf("%s", palavra);
+            buscarPalavraChaveCabCau(&listaCabCau1, palavra);
+            pausa();
+            break;
+        case 5:
+            printf("| Digite 1 para imprimir noticias pendentes, 2 para imprimir noticias verificadas e 3 para ambas: \n");
+            int tipo;
+            scanf("%d", &tipo);
+            if (tipo == 1) {
+                printf("| Noticias pendentes:\n");
+                imprimirListaCabCau(&listaCabCau1);
+                pausa();
+            }
+            else if (tipo == 2) {
+                printf("| Noticias verificadas:\n");
+                imprimirListaEncadeada(listaEncadeada1);
+                pausa();
+            }
+            else if (tipo == 3) {
+                printf("| Todas as noticias:\n");
+                printf("| Noticias pendentes:\n");
+                imprimirListaCabCau(&listaCabCau1);
+                printf("| Noticias verificadas:\n");
+                imprimirListaEncadeada(listaEncadeada1);
+                pausa();
+            }
+            else {
+                printf("| Opcao invalida. Tente novamente.\n");
+                pausa();
+            }
+            break;
+        case 6:
+            ClassificarNoticia(&listaCabCau1, &listaEncadeada1);
+            pausa();
+            break;
+        case 7:
+            retornarQuantidadeNoticiasCabCau(&listaCabCau1);
+            retornarQuantidadeSuspeitas(listaEncadeada1);
+            retornarQuantidadeConfiaveis(listaEncadeada1);
+            pausa();
+            break;
+        case 8:
+            printf("| Saindo do programa. . .\n");
+            break;
+        default:
+            printf("| Opcao invalida. Tente novamente.\n");
+            pausa();
+    }
+
+    } while (opcao != 8);
 
     return 0;
 }
